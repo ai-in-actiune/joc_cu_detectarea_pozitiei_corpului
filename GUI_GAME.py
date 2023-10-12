@@ -80,12 +80,12 @@ class App:
         if ret:
             frame = cv2.flip(frame, 1)
 
-            # Convert the frame to RGB format for tkinter
+            # Convert the frame to RGB format for tkinter and update camera canva with new  frame
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_pil = Image.fromarray(frame_rgb)
             frame_tk = ImageTk.PhotoImage(image=frame_pil)
 
-            # Update the camera canvas with the new frame
+           
             self.camera_canvas.create_image(0, 0, anchor=tk.NW, image=frame_tk)
             self.camera_canvas.image = frame_tk  # Keep a reference to prevent garbage collection
 
