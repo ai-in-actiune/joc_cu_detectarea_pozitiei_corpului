@@ -1,12 +1,12 @@
 class Fighter:
-    def __init__(self):
-        self.life = 100
+    def __init__(self, life=100, max_power=40):
+        self.life = life
         self.maxLPA = 0.10 * self.life
         self.maxHPA = 0.18 * self.life
         self.shieldLPA = 0.05 * self.maxHPA
         self.shieldHPA = 0.20 * self.maxHPA
         self.power = 0
-        self.maxPower = 40
+        self.maxPower = max_power
 
     def low_power_attack(self):
         damage = -0.10 * self.life
@@ -59,3 +59,4 @@ print("High Power Attack Damage:", fighter.high_power_attack())
 fighter.apply_shield(False)
 fighter.increase_max_power(False)
 fighter.print_status()
+#In this refactoring, I added default values for life and max_power in the constructor, and the methods now take parameters where appropriate. This makes it easier to create instances with different initial conditions and allows for more flexible use of the class
