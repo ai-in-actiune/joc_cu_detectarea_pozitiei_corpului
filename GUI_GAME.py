@@ -51,11 +51,11 @@ class App:
         frame.pack_propagate(False)
         frame.place(relx=0.4, rely=0.45, anchor=tk.E)
 
-        # Create a canvas to display the camera feed
+   
         self.camera_canvas = customtkinter.CTkCanvas(self.root, width=640, height=480)
         self.camera_canvas.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
-        # Create a canvas to display the camera feed
+  
         #self.camera_canvas = customtkinter.CTkCanvas(self.root, width=640, height=480)
        # self.camera_canvas.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
@@ -69,10 +69,10 @@ class App:
         self.actor_image = ImageTk.PhotoImage(actor_image)
         self.actor1_image = ImageTk.PhotoImage(actor1_image)
 
-        # Display actor image on the left frame
+   
         self.camera_canvas.create_image(0, 0, anchor=tk.NW, image=self.actor_image)
 
-        # Display actor1 image on the right frame
+       
         self.camera_canvas.create_image(640, 0, anchor=tk.NE, image=self.actor1_image)
 
     def update_camera(self):
