@@ -35,20 +35,23 @@ class Signin:
         label = customtkinter.CTkLabel(master=frame, text="Create an Account", font=("Arial Greek", 20))
         label.pack(pady=25)
 
-        self.first_name_entry = customtkinter.CTkEntry(master=frame, placeholder_text="First Name", font=("Arial", 20))
+        self.first_name_entry = customtkinter.CTkEntry(master=frame, placeholder_text="First Name", font=("Arial", 20),
+                                                       width=200)
         self.first_name_entry.pack(pady=12, padx=10)
 
-        self.last_name_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Last Name", font=("Arial", 20))
+        self.last_name_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Last Name", font=("Arial", 20),
+                                                      width=200)
         self.last_name_entry.pack(pady=12, padx=10)
 
-        self.username_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Username", font=("Arial", 20))
+        self.username_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Username", font=("Arial", 20),
+                                                     width=200)
         self.username_entry.pack(pady=12, padx=10)
 
         self.password_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Password", show="*",
-                                                     font=("Arial", 20))
+                                                     font=("Arial", 20), width=200)
         self.password_entry.pack(pady=12, padx=10)
 
-        self.email_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Email", font=("Arial", 20))
+        self.email_entry = customtkinter.CTkEntry(master=frame, placeholder_text="Email", font=("Arial", 20), width=200)
         self.email_entry.pack(pady=12, padx=10)
 
         button = customtkinter.CTkButton(master=frame, text="Create Account", command=self.create_account,
@@ -67,9 +70,11 @@ class Signin:
         email = self.email_entry.get()
 
         # Use the database handler to create the user account
-        DatabaseHandler.connect()
-        DatabaseHandler.create_user(first_name, last_name, username, password, email)
-        DatabaseHandler.disconnect()
+        db_handler = DatabaseHandler("userdata.db")  # Specify your database filename
+        db_handler.connect()
+        db_handler.create_user(username,
+                               password)  # You might want to add first_name, last_name, and email as arguments
+        db_handler.disconnect()
 
         print("Account created successfully!")
 
