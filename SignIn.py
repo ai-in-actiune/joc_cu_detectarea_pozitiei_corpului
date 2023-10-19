@@ -2,7 +2,8 @@ import customtkinter
 import tkinter as tk
 import sqlite3
 import hashlib
-from database import DatabaseHandler
+from dataManager import DatabaseHandler
+
 
 class Signin:
     def __init__(self, root):
