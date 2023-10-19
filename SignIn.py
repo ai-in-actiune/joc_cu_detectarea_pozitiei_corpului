@@ -11,6 +11,7 @@ class Signin:
         self.root.geometry("1300x700")
         self.center_window()
         self.root.configure(bg="#99CCFF")
+        self.checkbox_state = tk.BooleanVar()
 
         self.create_widgets()
 
@@ -27,12 +28,40 @@ class Signin:
     def enter_anonymous(self):
         print("test_anonymous")
 
+    def show_message_popup(self, message):
+        popup_window = tk.Toplevel(self.root)
+        popup_window.title("Message")
+
+        # Create a dark mode theme
+        popup_window.configure(bg="#333333")
+
+        popup_label = tk.Label(popup_window, text=message, fg="white", bg="#333333",
+                               font=("Arial", 16))  # Adjust the font size as needed
+        popup_label.pack(pady=20)
+
+        close_button = tk.Button(popup_window, text="OK", command=popup_window.destroy, bg="#E88655", fg="white",
+                                 font=("Arial", 16))  # Adjust the font size as needed
+        close_button.pack()
+
+        # Get the screen dimensions
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        # Calculate the position to center the pop-up window
+        popup_width = 400  # Adjust the width as needed
+        popup_height = 150  # Adjust the height as needed
+        x_center = (screen_width - popup_width) // 2
+        y_center = (screen_height - popup_height) // 2
+
+        # Set the position and dimensions of the pop-up window to center it
+        popup_window.geometry(f"{popup_width}x{popup_height}+{x_center}+{y_center}")
+
     def create_widgets(self):
-        frame = customtkinter.CTkFrame(master=self.root, width=450, height=400)
+        frame = customtkinter.CTkFrame(master=self.root, width=450, height=500)
         frame.pack_propagate(False)
         frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-        label = customtkinter.CTkLabel(master=frame, text="Create an Account", font=("Arial Greek", 20))
+        label = customtkinter.CTkLabel(master=frame, text="Create an Account", font=("Arial Greek", 30))
         label.pack(pady=25)
 
         self.first_name_entry = customtkinter.CTkEntry(master=frame, placeholder_text="First Name", font=("Arial", 20),
@@ -55,11 +84,12 @@ class Signin:
         self.email_entry.pack(pady=12, padx=10)
 
         button = customtkinter.CTkButton(master=frame, text="Create Account", command=self.create_account,
-                                         font=("Arial", 20, "bold"), fg_color="#E88655", hover_color="#EBA17C")
+                                         font=("Arial", 20, "bold"), fg_color="#E88655", hover_color="#EBA17C", width=170)
         button.pack(pady=12, padx=10)
 
         checkbox = customtkinter.CTkCheckBox(master=frame, text="I agree to the terms and conditions",
-                                             font=("Arial", 20), fg_color="#E88655", hover_color="#EBA17C")
+                                             font=("Arial", 20), fg_color="#E88655", hover_color="#EBA17C",
+                                             variable=self.checkbox_state)
         checkbox.pack(pady=12, padx=10)
 
     def create_account(self):
@@ -69,14 +99,17 @@ class Signin:
         password = self.password_entry.get()
         email = self.email_entry.get()
 
-        # Use the database handler to create the user account
-        db_handler = DatabaseHandler("userdata.db")  # Specify your database filename
-        db_handler.connect()
-        db_handler.create_user(username,
-                               password)  # You might want to add first_name, last_name, and email as arguments
-        db_handler.disconnect()
-
-        print("Account created successfully!")
+        # Check if the checkbox is checked
+        if self.checkbox_state.get():
+            # Use the database handler to create the user account
+         #   db_handler = DatabaseHandler("userdata.db")  # Specify your database filename
+          #  db_handler.connect()
+           # db_handler.create_user(username, password)  # Password is hashed in the create_user method
+            #db_handler.disconnect()
+            print( "Yes")
+        else:
+            # Show a message to agree to the terms and conditions in a pop-up window
+            self.show_message_popup("Please agree to the terms and conditions.")
 
 if __name__ == "__main__":
     root = customtkinter.CTk()
