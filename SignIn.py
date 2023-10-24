@@ -49,8 +49,8 @@ class Signin:
         screen_height = self.root.winfo_screenheight()
 
         # Calculate the position to center the pop-up window
-        popup_width = 400  # Adjust the width as needed
-        popup_height = 150  # Adjust the height as needed
+        popup_width = 400  # Adjust the width
+        popup_height = 150  # Adjust the height
         x_center = (screen_width - popup_width) // 2
         y_center = (screen_height - popup_height) // 2
 

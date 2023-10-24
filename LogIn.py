@@ -26,11 +26,6 @@ class LoginApp:
         print("test_anonymous")
 
 
-    def sign_in(self):
-        # Add code to handle the sign-in process when the "Sign In" button is clicked
-        # You can open a new window or navigate to a sign-in page here
-        print("Sign In button clicked")
-
     def create_widgets(self):
         frame = customtkinter.CTkFrame(master=self.root, width=450, height=500)
         frame.pack_propagate(False)
@@ -66,7 +61,7 @@ class LoginApp:
         # Add a "Sign In" button below the label
         sign_in_button = customtkinter.CTkButton(master=frame, text="Sign In", command=self.open_signin_page,
                                                  font=("Arial", 20, "bold"), fg_color="#E88655", hover_color="#EBA17C")
-        sign_in_button.pack(pady=5)  # Specify a smaller pady value to keep the button visible
+        sign_in_button.pack(pady=5)
 
     def open_signin_page(self):
         self.root.destroy()  # Close the current LoginApp window
