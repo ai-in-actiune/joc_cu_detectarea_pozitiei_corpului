@@ -37,11 +37,11 @@ class Signin:
         popup_window.configure(bg="#333333")
 
         popup_label = tk.Label(popup_window, text=message, fg="white", bg="#333333",
-                               font=("Arial", 16))  # Adjust the font size as needed
+                               font=("Arial", 16))
         popup_label.pack(pady=20)
 
         close_button = tk.Button(popup_window, text="OK", command=popup_window.destroy, bg="#E88655", fg="white",
-                                 font=("Arial", 16))  # Adjust the font size as needed
+                                 font=("Arial", 16))
         close_button.pack()
 
         # Get the screen dimensions
@@ -97,9 +97,16 @@ class Signin:
     def is_valid_name(name):
         return bool(re.match("^[A-Za-z]+$", name))
 
+    @staticmethod
+    def is_valid_email(email):
+        # Define a regular expression pattern for a valid email address
+        pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        return bool(re.match(pattern, email))
+
     def create_account(self):
         first_name = self.first_name_entry.get()
         last_name = self.last_name_entry.get()
+        email = self.email_entry.get()
 
         if not self.is_valid_name(first_name):
             self.show_message_popup("Invalid first name. Please use only letters.")
@@ -107,6 +114,10 @@ class Signin:
 
         if not self.is_valid_name(last_name):
             self.show_message_popup("Invalid last name. Please use only letters.")
+            return
+
+        if not self.is_valid_email(email):
+            self.show_message_popup("Invalid email address. Please provide a valid email.")
             return
 
         if self.checkbox_state.get():
