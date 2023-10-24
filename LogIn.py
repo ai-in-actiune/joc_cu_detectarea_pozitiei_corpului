@@ -9,7 +9,7 @@ class LoginApp:
         self.root.geometry("1300x700")
         self.center_window()
         self.root.configure(bg="#99CCFF")
-
+        
         self.create_widgets()
 
     def center_window(self):

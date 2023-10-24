@@ -1,5 +1,6 @@
 import customtkinter
 import tkinter as tk
+import re
 import sqlite3
 import hashlib
 from dataManager import DatabaseHandler
@@ -92,24 +93,27 @@ class Signin:
                                              variable=self.checkbox_state)
         checkbox.pack(pady=12, padx=10)
 
+    @staticmethod
+    def is_valid_name(name):
+        return bool(re.match("^[A-Za-z]+$", name))
+
     def create_account(self):
         first_name = self.first_name_entry.get()
         last_name = self.last_name_entry.get()
-        username = self.username_entry.get()
-        password = self.password_entry.get()
-        email = self.email_entry.get()
 
-        # Check if the checkbox is checked
+        if not self.is_valid_name(first_name):
+            self.show_message_popup("Invalid first name. Please use only letters.")
+            return
+
+        if not self.is_valid_name(last_name):
+            self.show_message_popup("Invalid last name. Please use only letters.")
+            return
+
         if self.checkbox_state.get():
-            # Use the database handler to create the user account
-         #   db_handler = DatabaseHandler("userdata.db")  # Specify your database filename
-          #  db_handler.connect()
-           # db_handler.create_user(username, password)  # Password is hashed in the create_user method
-            #db_handler.disconnect()
-            print( "Yes")
+            self.login()
         else:
-            # Show a message to agree to the terms and conditions in a pop-up window
             self.show_message_popup("Please agree to the terms and conditions.")
+
 
 if __name__ == "__main__":
     root = customtkinter.CTk()

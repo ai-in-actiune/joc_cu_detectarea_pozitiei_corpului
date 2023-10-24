@@ -1,3 +1,5 @@
-PyQt5~=5.15
-Tk~=8.6.13 
+Tk~=8.6.13
 OpenCV – 4.8.0
+
+customtkinter~=5.2.0
+Pillow~=10.0.1
